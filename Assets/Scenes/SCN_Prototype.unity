@@ -134,8 +134,8 @@ GameObject:
   - component: {fileID: 70619994}
   - component: {fileID: 70619993}
   - component: {fileID: 70619995}
-  m_Layer: 0
-  m_Name: Walls (1)
+  m_Layer: 3
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -243,8 +243,8 @@ GameObject:
   - component: {fileID: 158527688}
   - component: {fileID: 158527687}
   - component: {fileID: 158527689}
-  m_Layer: 0
-  m_Name: Walls
+  m_Layer: 3
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -352,8 +352,8 @@ GameObject:
   - component: {fileID: 202349430}
   - component: {fileID: 202349429}
   - component: {fileID: 202349431}
-  m_Layer: 0
-  m_Name: Walls (2)
+  m_Layer: 3
+  m_Name: Ground
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -464,6 +464,7 @@ GameObject:
   - component: {fileID: 994598290}
   - component: {fileID: 994598286}
   - component: {fileID: 994598285}
+  - component: {fileID: 994598291}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -596,18 +597,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myRigidbody2D: {fileID: 994598285}
+  groundLayer:
+    serializedVersion: 2
+    m_Bits: 8
+  anim: {fileID: 994598291}
   speed: 5
   runSpeed: 10
-  friction: {x: 0.2, y: 0}
   jumpForce: 15
-  jumpScaleX: 0.7
-  jumpScaleY: 1.5
-  jumpAnimationDuration: 0.2
-  jumpEase: 27
-  landScaleX: 0.5
-  landScaleY: 1.5
-  landAnimationDuration: 0.3
-  landEase: 27
 --- !u!114 &994598290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -622,6 +618,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 10
   delayToKill: 0.5
+--- !u!95 &994598291
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 994598284}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 969c6ebfddc40234f9c1d51059eef995, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &1133778874
 GameObject:
   m_ObjectHideFlags: 0
