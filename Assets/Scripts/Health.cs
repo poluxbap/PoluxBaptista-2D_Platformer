@@ -8,17 +8,20 @@ public class Health : MonoBehaviour
     public float delayToKill = .5f;
 
     private int _currentHealth;
-    private bool _isDead;
+    public bool isDead;
+
+    public Animator anim;
+    public string dethAnim;
 
     private void Awake()
     {
-        _isDead = false;
-        _currentHealth = health;
+        isDead = false;
+        _currentHealth = health;  
     }
 
     public void Damage(int damage)
     {
-        if(!_isDead)
+        if(!isDead)
         {
             _currentHealth -= damage;
         }
@@ -31,7 +34,8 @@ public class Health : MonoBehaviour
 
     private void Kill()
     {
-        _isDead = true;
+        isDead = true;
+        anim.Play("Base Layer." + dethAnim);
         Destroy(gameObject, delayToKill);
     }
 }
