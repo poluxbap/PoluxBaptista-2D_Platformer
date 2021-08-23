@@ -11,7 +11,6 @@ public class Health : MonoBehaviour
     public bool isDead;
 
     public Animator anim;
-    public string dethAnim;
 
     private void Awake()
     {
@@ -35,7 +34,8 @@ public class Health : MonoBehaviour
     private void Kill()
     {
         isDead = true;
-        anim.Play("Base Layer." + dethAnim);
+        anim.SetBool("IsDead", isDead);
+        anim.SetTrigger("Death");
         Destroy(gameObject, delayToKill);
     }
 }

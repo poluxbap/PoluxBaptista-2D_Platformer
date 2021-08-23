@@ -9,30 +9,39 @@ public class Player : MonoBehaviour
     public LayerMask groundLayer;
     public Animator anim;
     public Health player;
+    public Transform ground;
 
     [Header("Physics")]
     public float speed;
     public float runSpeed;
     public float jumpForce;
 
-    private bool _isRunning = false;
+    private float _localSpeed;
     private float _horizontalAxes;
-    private bool _isFlipped = false;
-
-    public void Awake()
-    {
-        _horizontalAxes = Input.GetAxis("Horizontal");
-    }
 
     void Update()
     {
-        //FlipChildren();
-
-        _isRunning = Input.GetKey(KeyCode.LeftControl);
-        
         if(!player.isDead)
         {
-            myRigidbody2D.velocity = new Vector2(_horizontalAxes * (_isRunning ? runSpeed : speed), myRigidbody2D.velocity.y);
+            _horizontalAxes = Input.GetAxis("Horizontal");
+
+            if(_horizontalAxes == 0)
+            {
+                _localSpeed = 0;
+            }
+            else
+            {
+                if (Input.GetKey(KeyCode.LeftControl))
+                {
+                    _localSpeed = runSpeed;
+                }
+                else
+                {
+                    _localSpeed = speed;
+                }
+            }
+
+            myRigidbody2D.velocity = new Vector2(_horizontalAxes * _localSpeed, myRigidbody2D.velocity.y);
 
             AnimationStateConfig();
 
@@ -50,29 +59,18 @@ public class Player : MonoBehaviour
     {
         if (_horizontalAxes > 0)
         {
-            _isFlipped = true;
-            anim.SetBool(_isRunning ? "Run" : "Walk", true);
+            myRigidbody2D.transform.localScale = new Vector3(1, 1, 1);
         }
         else if (_horizontalAxes < 0)
         {
-            _isFlipped = false;
-            anim.SetBool(_isRunning ? "Run" : "Walk", true);
+            myRigidbody2D.transform.localScale = new Vector3(-1, 1, 1);
         }
-        else
-        {
-            anim.SetBool("Walk", false);
-            anim.SetBool("Run", false);
-        }
-    }
 
-    private void FlipChildren()
-    {
-        //for()
-        this.GetComponentInChildren<SpriteRenderer>().flipX = _isFlipped;
+        anim.SetFloat("XMov", _localSpeed);
     }
 
     private bool onGround()
     {
-        return Physics2D.OverlapCircle(new Vector2(transform.position.x, transform.position.y - (transform.localScale.y / 2f)), transform.localScale.x / 2f, groundLayer);
+        return Physics2D.OverlapCircle(ground.position, .75f, groundLayer);
     }
 }
