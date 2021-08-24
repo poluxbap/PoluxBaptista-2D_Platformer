@@ -21,49 +21,45 @@ public class Player : MonoBehaviour
 
     void Update()
     {
-        if(!player.isDead)
-        {
-            _horizontalAxes = Input.GetAxis("Horizontal");
+        if (player.isDead) return;
 
-            if(_horizontalAxes == 0)
+        _horizontalAxes = Input.GetAxis("Horizontal");
+
+        if(_horizontalAxes == 0)
+        {
+            _localSpeed = 0;
+        }
+        else
+        {
+            if (Input.GetKey(KeyCode.LeftControl))
             {
-                _localSpeed = 0;
+                _localSpeed = runSpeed;
             }
             else
             {
-                if (Input.GetKey(KeyCode.LeftControl))
-                {
-                    _localSpeed = runSpeed;
-                }
-                else
-                {
-                    _localSpeed = speed;
-                }
+                _localSpeed = speed;
             }
-
-            myRigidbody2D.velocity = new Vector2(_horizontalAxes * _localSpeed, myRigidbody2D.velocity.y);
-
-            AnimationStateConfig();
-
-            if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && onGround())
-            {
-                myRigidbody2D.velocity = Vector2.up * jumpForce;
-            }
-
-            anim.SetBool("Grounded", onGround());
-            anim.SetFloat("Vel", myRigidbody2D.velocity.y);
         }
+
+        myRigidbody2D.velocity = new Vector2(_horizontalAxes * _localSpeed, myRigidbody2D.velocity.y);
+
+        AnimationStateConfig();
+
+        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && onGround())
+        {
+            myRigidbody2D.velocity = Vector2.up * jumpForce;
+        }
+
+        anim.SetBool("Grounded", onGround());
+        anim.SetFloat("Vel", myRigidbody2D.velocity.y);
     }
 
     private void AnimationStateConfig()
     {
-        if (_horizontalAxes > 0)
+        if(_horizontalAxes != 0)
         {
-            myRigidbody2D.transform.localScale = new Vector3(1, 1, 1);
-        }
-        else if (_horizontalAxes < 0)
-        {
-            myRigidbody2D.transform.localScale = new Vector3(-1, 1, 1);
+            var direction = Mathf.Sign(_horizontalAxes);
+            myRigidbody2D.transform.localScale = new Vector3(direction, 1, 1);
         }
 
         anim.SetFloat("XMov", _localSpeed);
