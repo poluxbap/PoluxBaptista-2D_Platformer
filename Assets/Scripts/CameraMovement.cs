@@ -16,12 +16,17 @@ public class CameraMovement : MonoBehaviour
     void Awake()
     {
         camera = GetComponent<Camera>();
+        if(GameManager.Instance.currentPlayer != null)
+        {
+            target = GameManager.Instance.currentPlayer.transform;
+        }
     }
 
-    void Update()
+    void LateUpdate()
     {
         if (target)
         {
+            target = GameManager.Instance.currentPlayer.transform;
             Vector3 point = camera.WorldToViewportPoint(target.position);
             Vector3 delta = target.position - camera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, point.z));
             Vector3 destination = transform.position + delta + new Vector3(offsetX, offsetY, 0);

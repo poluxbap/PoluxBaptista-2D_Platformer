@@ -19,7 +19,7 @@ public class GameManager : Singleton<GameManager>
     public float delay = 0.1f;
     public Ease ease = Ease.OutBack;
 
-    private GameObject _currentPlayer;
+    public GameObject currentPlayer;
 
     private void Start()
     {
@@ -28,8 +28,8 @@ public class GameManager : Singleton<GameManager>
 
     private void SpawnPlayer()
     {
-        _currentPlayer = Instantiate(playerPrefab);
-        _currentPlayer.transform.position = startPoint.transform.position;
-        _currentPlayer.transform.DOScale(0, duration).SetEase(ease).From().SetDelay(delay);
+        currentPlayer = Instantiate(playerPrefab);
+        currentPlayer.transform.position = startPoint.transform.position;
+        currentPlayer.transform.DOScale(0, duration).SetEase(ease).From().SetDelay(delay);
     }
 }

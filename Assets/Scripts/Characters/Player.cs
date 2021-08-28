@@ -1,16 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using DG.Tweening;
 
-public class Player : MonoBehaviour
+public class Player : CharacterBase
 {
     public Rigidbody2D myRigidbody2D;
     public LayerMask groundLayer;
-    public Animator anim;
-    public Health player;
     public Transform ground;
 
+    [Space]
     [Header("Physics")]
     public float speed;
     public float runSpeed;
@@ -19,9 +17,15 @@ public class Player : MonoBehaviour
     private float _localSpeed;
     private float _horizontalAxes;
 
+    private void Awake()
+    {
+        ground = transform.GetChild(1);
+        anim = GetComponent<Animator>();
+    }
+
     void Update()
     {
-        if (player.isDead) return;
+        if (isDead) return;
 
         _horizontalAxes = Input.GetAxis("Horizontal");
 
@@ -45,7 +49,7 @@ public class Player : MonoBehaviour
 
         AnimationStateConfig();
 
-        if ((Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.Space)) && onGround())
+        if (Input.GetKeyDown(KeyCode.UpArrow) && onGround())
         {
             myRigidbody2D.velocity = Vector2.up * jumpForce;
         }
