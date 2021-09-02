@@ -5,41 +5,31 @@ using DG.Tweening;
 
 public class CharacterBase : MonoBehaviour
 {
-    public int health = 10;
-    public float delayToKill = .5f;
-
-    public bool isDead;
-
+    public SO_Character charInfo;
     public Animator anim;
-
-    [Space]
-    [Header("onHit Animation")]
-    public List<SpriteRenderer> spriteRederers;
-    public Color onHitColor = Color.red;
-    public float onHitDuration = .3f;
 
     private int _currentHealth;
     private Tween _currentTwenn;
 
     private void OnValidate()
     {
-        spriteRederers = new List<SpriteRenderer>();
+        charInfo.spriteRederers = new List<SpriteRenderer>();
         foreach (var child in transform.GetComponentsInChildren<SpriteRenderer>())
         {
-            spriteRederers.Add(child);
+            charInfo.spriteRederers.Add(child);
         }
     }
 
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        isDead = false;
-        _currentHealth = health;
+        charInfo.isDead = false;
+        _currentHealth = charInfo.health;
     }
 
     public void Damage(int damage)
     {
-        if (!isDead)
+        if (!charInfo.isDead)
         {
             _currentHealth -= damage;
         }
@@ -54,10 +44,10 @@ public class CharacterBase : MonoBehaviour
 
     private void Kill()
     {
-        isDead = true;
-        anim.SetBool("IsDead", isDead);
+        charInfo.isDead = true;
+        anim.SetBool("IsDead", charInfo.isDead);
         anim.SetTrigger("Death");
-        Destroy(gameObject, delayToKill);
+        Destroy(gameObject, charInfo.delayToKill);
     }
 
     public void FlashColorOnHit()
@@ -66,12 +56,12 @@ public class CharacterBase : MonoBehaviour
         if (_currentTwenn != null)
         {
             _currentTwenn.Kill();
-            spriteRederers.ForEach(i => i.color = Color.white);
+            charInfo.spriteRederers.ForEach(i => i.color = Color.white);
         }
 
-        foreach (var sprite in spriteRederers)
+        foreach (var sprite in charInfo.spriteRederers)
         {
-            _currentTwenn = sprite.DOColor(onHitColor, onHitDuration).SetLoops(2, LoopType.Yoyo);
+            _currentTwenn = sprite.DOColor(charInfo.onHitColor, charInfo.onHitDuration).SetLoops(2, LoopType.Yoyo);
         }
     }
 }

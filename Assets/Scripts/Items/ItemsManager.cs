@@ -12,11 +12,6 @@ public class ItemsManager : Singleton<ItemsManager>
         Reset();
     }
 
-    private void Update()
-    {
-        coinText.text = "x " + coins;
-    }
-
     public void Reset()
     {
         coins = 0;
@@ -25,5 +20,6 @@ public class ItemsManager : Singleton<ItemsManager>
     public void AddCoins(int amount = 1)
     {
         coins += amount;
+        coinText.text = "x " + coins;
     }
 }

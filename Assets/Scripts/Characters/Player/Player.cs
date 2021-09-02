@@ -8,12 +8,6 @@ public class Player : CharacterBase
     public LayerMask groundLayer;
     public Transform ground;
 
-    [Space]
-    [Header("Physics")]
-    public float speed;
-    public float runSpeed;
-    public float jumpForce;
-
     private float _localSpeed;
     private float _horizontalAxes;
 
@@ -25,7 +19,7 @@ public class Player : CharacterBase
 
     void Update()
     {
-        if (isDead) return;
+        if (charInfo.isDead) return;
 
         _horizontalAxes = Input.GetAxis("Horizontal");
 
@@ -37,11 +31,11 @@ public class Player : CharacterBase
         {
             if (Input.GetKey(KeyCode.LeftControl))
             {
-                _localSpeed = runSpeed;
+                _localSpeed = charInfo.runSpeed;
             }
             else
             {
-                _localSpeed = speed;
+                _localSpeed = charInfo.speed;
             }
         }
 
@@ -51,7 +45,7 @@ public class Player : CharacterBase
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && onGround())
         {
-            myRigidbody2D.velocity = Vector2.up * jumpForce;
+            myRigidbody2D.velocity = Vector2.up * charInfo.jumpForce;
         }
 
         anim.SetBool("Grounded", onGround());
