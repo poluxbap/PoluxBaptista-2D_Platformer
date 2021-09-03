@@ -8,6 +8,7 @@ public class CharacterBase : MonoBehaviour
     public SO_Character charInfo;
     public SO_Int items;
     public Animator anim;
+    public bool isDead = false;
 
     private int _currentHealth;
     private Tween _currentTwenn;
@@ -24,20 +25,22 @@ public class CharacterBase : MonoBehaviour
     private void Awake()
     {
         anim = GetComponent<Animator>();
-        charInfo.isDead = false;
+        isDead = false;
         _currentHealth = charInfo.health;
     }
 
     public void Damage(int damage)
     {
-        if (!charInfo.isDead && items.shield == 0)
-        {
-            _currentHealth -= damage;
-        }
-        else if(items.shield > 0)
+        if (isDead) return;
+
+        if(items.shield > 0)
         {
             items.shield--;
+            FlashColorOnHit();
+            return;
         }
+
+        _currentHealth -= damage;
 
         if (_currentHealth <= 0)
         {
@@ -49,8 +52,8 @@ public class CharacterBase : MonoBehaviour
 
     private void Kill()
     {
-        charInfo.isDead = true;
-        anim.SetBool("IsDead", charInfo.isDead);
+        isDead = true;
+        anim.SetBool("IsDead", isDead);
         anim.SetTrigger("Death");
         Destroy(gameObject, charInfo.delayToKill);
     }

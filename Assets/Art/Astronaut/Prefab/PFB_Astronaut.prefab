@@ -1049,6 +1049,7 @@ MonoBehaviour:
   charInfo: {fileID: 11400000, guid: 23132f5fa3edae0438550d02da5bffd6, type: 2}
   items: {fileID: 11400000, guid: 784925632cd88ef45a553c2159c9da28, type: 2}
   anim: {fileID: 6413013834153556191}
+  isDead: 0
   myRigidbody2D: {fileID: 5800506720083381828}
   groundLayer:
     serializedVersion: 2

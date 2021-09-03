@@ -8,7 +8,6 @@ public class SO_Character : ScriptableObject
     [Header("Base Info")]
     public int health = 10;
     public float delayToKill = .5f;
-    public bool isDead;
     public List<SpriteRenderer> spriteRederers;
     public Color onHitColor = Color.red;
     public float onHitDuration = .3f;
