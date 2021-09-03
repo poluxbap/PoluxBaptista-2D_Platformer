@@ -4,8 +4,7 @@ using UnityEngine;
 using TMPro;
 public class ItemsManager : Singleton<ItemsManager>
 {
-    public int coins;
-    public TMP_Text coinText;
+    public SO_Int soInt;
 
     void Start()
     {
@@ -14,12 +13,38 @@ public class ItemsManager : Singleton<ItemsManager>
 
     public void Reset()
     {
-        coins = 0;
+        soInt.coins = 0;
+        soInt.powerjump = 0;
+        soInt.shield = 0;
     }
 
     public void AddCoins(int amount = 1)
     {
-        coins += amount;
-        coinText.text = "x " + coins;
+        soInt.coins += amount;
+    }
+
+    public void AddPowerJump(int amount = 1)
+    {
+        soInt.powerjump += amount;
+    }
+
+    public void AddShield(int amount = 1)
+    {
+        soInt.shield += amount;
+    }
+
+    public void SubtractCoins(int amount = 1)
+    {
+        soInt.coins += amount;
+    }
+
+    public void SubtractPowerJump(int amount = 1)
+    {
+        soInt.powerjump += amount;
+    }
+
+    public void SubtractShield(int amount = 1)
+    {
+        soInt.shield += amount;
     }
 }

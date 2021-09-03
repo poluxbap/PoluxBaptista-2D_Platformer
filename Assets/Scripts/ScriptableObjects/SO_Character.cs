@@ -18,6 +18,7 @@ public class SO_Character : ScriptableObject
     public float speed;
     public float runSpeed;
     public float jumpForce;
+    public float powerJumpForce;
 
     [Space]
     [Header("Enemy Info")]

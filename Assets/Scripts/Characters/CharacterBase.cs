@@ -6,6 +6,7 @@ using DG.Tweening;
 public class CharacterBase : MonoBehaviour
 {
     public SO_Character charInfo;
+    public SO_Int items;
     public Animator anim;
 
     private int _currentHealth;
@@ -29,9 +30,13 @@ public class CharacterBase : MonoBehaviour
 
     public void Damage(int damage)
     {
-        if (!charInfo.isDead)
+        if (!charInfo.isDead && items.shield == 0)
         {
             _currentHealth -= damage;
+        }
+        else if(items.shield > 0)
+        {
+            items.shield--;
         }
 
         if (_currentHealth <= 0)

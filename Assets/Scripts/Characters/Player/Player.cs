@@ -43,10 +43,16 @@ public class Player : CharacterBase
 
         AnimationStateConfig();
 
-        if (Input.GetKeyDown(KeyCode.UpArrow) && onGround())
+        /* if (Input.GetKeyDown(KeyCode.UpArrow) && onGround())
         {
+            if(items.powerjump > 0)
+            {
+                myRigidbody2D.velocity = Vector2.up * charInfo.powerJumpForce;
+                items.powerjump--;
+            }
+
             myRigidbody2D.velocity = Vector2.up * charInfo.jumpForce;
-        }
+        }*/
 
         anim.SetBool("Grounded", onGround());
         anim.SetFloat("Vel", myRigidbody2D.velocity.y);

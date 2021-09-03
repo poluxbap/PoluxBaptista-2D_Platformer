@@ -396,6 +396,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charInfo: {fileID: 11400000, guid: 7795a8004ef70d040a43bca9ebc71768, type: 2}
+  items: {fileID: 11400000, guid: 784925632cd88ef45a553c2159c9da28, type: 2}
   anim: {fileID: 2403329696302037006}
 --- !u!61 &1085674136
 BoxCollider2D:
