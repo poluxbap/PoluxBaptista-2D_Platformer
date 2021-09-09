@@ -4,13 +4,18 @@ using UnityEngine;
 
 public class GunBase : MonoBehaviour
 {
-    public GameObject projectileBase;
+    public PoolManager poolManager;
 
     public Transform startPosition;
     public float timeBetweenShoot = .3f;
     public Transform playerSide;
 
     private Coroutine _currentCoroutine;
+
+    private void Start()
+    {
+        poolManager = FindObjectOfType<PoolManager>();    
+    }
 
     void Update()
     {
@@ -38,8 +43,14 @@ public class GunBase : MonoBehaviour
 
     public void Shoot()
     {
-        var projectile = Instantiate(projectileBase);
-        projectile.transform.position = startPosition.position;
-        projectile.transform.localScale = playerSide.localScale;
+        var projectile = poolManager.GetPooledObject();
+
+        if(projectile != null)
+        {
+            projectile.SetActive(true);
+            projectile.GetComponent<ProjectileBase>().StartProjectile();
+            projectile.transform.position = startPosition.position;
+            projectile.transform.localScale = playerSide.localScale;
+        }
     }
 }

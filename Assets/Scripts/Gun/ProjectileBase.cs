@@ -10,9 +10,14 @@ public class ProjectileBase : MonoBehaviour
 
     public int damageAmount = 1;
 
-    private void Awake()
+    public void StartProjectile()
     {
-        Destroy(gameObject, timeToDestroy);
+        Invoke(nameof(FinishUsage), timeToDestroy);
+    }
+
+    private void FinishUsage()
+    {
+        gameObject.SetActive(false);
     }
 
     void Update()
@@ -27,7 +32,7 @@ public class ProjectileBase : MonoBehaviour
         if(enemy != null)
         {
             enemy.Damage(damageAmount);
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }
