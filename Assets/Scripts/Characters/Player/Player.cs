@@ -7,6 +7,7 @@ public class Player : CharacterBase
     public Rigidbody2D myRigidbody2D;
     public LayerMask groundLayer;
     public Transform ground;
+    public ParticleSystem jumpParticles;
 
     private float _localSpeed;
     private float _horizontalAxes;
@@ -54,6 +55,8 @@ public class Player : CharacterBase
             {
                 myRigidbody2D.velocity = Vector2.up * charInfo.jumpForce;
             }
+
+            if (jumpParticles != null) jumpParticles.Play();
         }
 
         anim.SetBool("Grounded", onGround());
