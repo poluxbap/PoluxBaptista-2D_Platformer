@@ -16,6 +16,7 @@ public class Player : CharacterBase
     {
         ground = transform.GetChild(1);
         anim = GetComponent<Animator>();
+        VFXManager.Instance.PlayVFXByType(VFXManager.VFXType.RUN, transform.position, ground, true);
     }
 
     void Update()
@@ -56,7 +57,7 @@ public class Player : CharacterBase
                 myRigidbody2D.velocity = Vector2.up * charInfo.jumpForce;
             }
 
-            if (jumpParticles != null) jumpParticles.Play();
+            VFXManager.Instance.PlayVFXByType(VFXManager.VFXType.JUMP, transform.position, ground);
         }
 
         anim.SetBool("Grounded", onGround());

@@ -20,6 +20,8 @@ public class CameraMovement : MonoBehaviour
         {
             target = GameManager.Instance.currentPlayer.transform;
         }
+
+        VFXManager.Instance.PlayVFXByType(VFXManager.VFXType.FIREFLY, transform.position, transform, true);
     }
 
     void LateUpdate()
