@@ -4,47 +4,40 @@ using UnityEngine;
 using TMPro;
 public class ItemsManager : Singleton<ItemsManager>
 {
-    public SO_Int soInt;
+    public enum ItemType { COIN, POWERJUMP, SHIELD }
 
-    void Start()
+    public List<ItemInfo> items = new List<ItemInfo>();
+
+    private void Start()
     {
-        Reset();
+        foreach (var item in items)
+        {
+            item.itemSO.value = 0;
+        }
     }
 
-    public void Reset()
+    public virtual void AddItem(ItemType type, int value)
     {
-        soInt.coins = 0;
-        soInt.powerjump = 0;
-        soInt.shield = 0;
+        var item = items.Find(i => i.type.Equals(type));
+
+        item.itemSO.value += value;
+
+        UpdateUI(item);
     }
 
-    public void AddCoins(int amount = 1)
+    protected virtual void UpdateUI(ItemInfo item)
     {
-        soInt.coins += amount;
-    }
+        if (!item.textMeshProUGUI)
+            return;
 
-    public void AddPowerJump(int amount = 1)
-    {
-        soInt.powerjump += amount;
+        item.textMeshProUGUI.text = " x" + item.itemSO.value.ToString();
     }
+}
 
-    public void AddShield(int amount = 1)
-    {
-        soInt.shield += amount;
-    }
-
-    public void SubtractCoins(int amount = 1)
-    {
-        soInt.coins += amount;
-    }
-
-    public void SubtractPowerJump(int amount = 1)
-    {
-        soInt.powerjump += amount;
-    }
-
-    public void SubtractShield(int amount = 1)
-    {
-        soInt.shield += amount;
-    }
+[System.Serializable]
+public class ItemInfo
+{
+    public ItemsManager.ItemType type = ItemsManager.ItemType.COIN;
+    public SO_Int itemSO;
+    public TextMeshProUGUI textMeshProUGUI;
 }

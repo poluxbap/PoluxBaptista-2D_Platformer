@@ -5,7 +5,5 @@ using UnityEngine;
 [CreateAssetMenu]
 public class SO_Int : ScriptableObject
 {
-    public int coins;
-    public int powerjump;
-    public int shield;
+    public int value;
 }

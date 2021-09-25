@@ -146,9 +146,9 @@ GameObject:
   - component: {fileID: 2704047389370462403}
   - component: {fileID: 4794784953876985287}
   - component: {fileID: 7928884296405615336}
-  - component: {fileID: 2724600069588373423}
+  - component: {fileID: 7672759104779687630}
   m_Layer: 5
-  m_Name: Button
+  m_Name: PFB_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -255,8 +255,20 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 4794784953876985287}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
---- !u!114 &2724600069588373423
+      m_Calls:
+      - m_Target: {fileID: 7672759104779687630}
+        m_TargetAssemblyTypeName: Utils, Assembly-CSharp
+        m_MethodName: Load
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 1
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &7672759104779687630
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}

@@ -12,6 +12,12 @@ public class Player : CharacterBase
     private float _localSpeed;
     private float _horizontalAxes;
 
+    [Header("Sound")]
+    public List<AudioClip> audioClipsList;
+    public List<AudioSource> audioSourcesList;
+
+    private int _soundIndex = 0;
+
     private void Awake()
     {
         ground = transform.GetChild(1);
@@ -47,10 +53,10 @@ public class Player : CharacterBase
 
         if (Input.GetKeyDown(KeyCode.UpArrow) && onGround())
         {
-            if(items.powerjump > 0)
+            if(powerJumps.value > 0)
             {
                 myRigidbody2D.velocity = Vector2.up * charInfo.powerJumpForce;
-                items.powerjump--;
+                ItemsManager.Instance.AddItem(ItemsManager.ItemType.POWERJUMP, -1);
             }
             else
             {
@@ -78,5 +84,17 @@ public class Player : CharacterBase
     private bool onGround()
     {
         return Physics2D.OverlapCircle(ground.position, .75f, groundLayer);
+    }
+
+    public void PlayRandomFootstep()
+    {
+        if (_soundIndex >= audioSourcesList.Count) _soundIndex = 0;
+
+        AudioSource audioSource = audioSourcesList[_soundIndex];
+
+        audioSource.clip = audioClipsList[Random.Range(0, audioClipsList.Count)];
+        audioSource.Play();
+
+        _soundIndex++;
     }
 }

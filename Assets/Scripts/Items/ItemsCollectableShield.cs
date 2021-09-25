@@ -7,6 +7,6 @@ public class ItemsCollectableShield : ItemsCollectableBase
     protected override void OnCollect()
     {
         base.OnCollect();
-        ItemsManager.Instance.AddShield();
+        ItemsManager.Instance.AddItem(ItemsManager.ItemType.SHIELD, 1);
     }
 }

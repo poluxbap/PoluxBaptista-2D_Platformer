@@ -6,7 +6,9 @@ using DG.Tweening;
 public class CharacterBase : MonoBehaviour
 {
     public SO_Character charInfo;
-    public SO_Int items;
+    public SO_Int coins;
+    public SO_Int powerJumps;
+    public SO_Int shields;
     public Animator anim;
     public bool isDead = false;
 
@@ -33,9 +35,9 @@ public class CharacterBase : MonoBehaviour
     {
         if (isDead) return;
 
-        if(items.shield > 0)
+        if(shields.value > 0)
         {
-            items.shield--;
+            ItemsManager.Instance.AddItem(ItemsManager.ItemType.SHIELD, -1);
             FlashColorOnHit();
             return;
         }

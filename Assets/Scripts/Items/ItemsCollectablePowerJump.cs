@@ -7,6 +7,6 @@ public class ItemsCollectablePowerJump : ItemsCollectableBase
     protected override void OnCollect()
     {
         base.OnCollect();
-        ItemsManager.Instance.AddPowerJump();
+        ItemsManager.Instance.AddItem(ItemsManager.ItemType.POWERJUMP, 1);
     }
 }
