@@ -32,4 +32,14 @@ public class GameManager : Singleton<GameManager>
         currentPlayer.transform.position = startPoint.transform.position;
         currentPlayer.transform.DOScale(0, duration).SetEase(ease).From().SetDelay(delay);
     }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+    }
+
+    public void UnPauseGame()
+    {
+        Time.timeScale = 1;
+    }    
 }

@@ -52,7 +52,7 @@ public class CharacterBase : MonoBehaviour
         FlashColorOnHit();
     }
 
-    private void Kill()
+    protected virtual void Kill()
     {
         isDead = true;
         anim.SetBool("IsDead", isDead);

@@ -1360,6 +1360,7 @@ MonoBehaviour:
   - {fileID: 5552309341029489729}
   - {fileID: 3511164698606970129}
   - {fileID: 6244268930621392526}
+  JumpAudioClip: {fileID: 8300000, guid: 85930ce8e9dafbe4d9f17dc819cc4010, type: 3}
 --- !u!50 &5800506720083381828
 Rigidbody2D:
   serializedVersion: 4

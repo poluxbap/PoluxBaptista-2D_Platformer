@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Player : CharacterBase
 {
@@ -15,6 +16,8 @@ public class Player : CharacterBase
     [Header("Sound")]
     public List<AudioClip> audioClipsList;
     public List<AudioSource> audioSourcesList;
+
+    public AudioClip JumpAudioClip;
 
     private int _soundIndex = 0;
 
@@ -63,11 +66,19 @@ public class Player : CharacterBase
                 myRigidbody2D.velocity = Vector2.up * charInfo.jumpForce;
             }
 
+            PlayJumpSound();
             VFXManager.Instance.PlayVFXByType(VFXManager.VFXType.JUMP, transform.position, ground);
         }
 
         anim.SetBool("Grounded", onGround());
         anim.SetFloat("YMov", myRigidbody2D.velocity.y);
+    }
+
+    protected override void Kill()
+    {
+        base.Kill();
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+
     }
 
     private void AnimationStateConfig()
@@ -93,6 +104,18 @@ public class Player : CharacterBase
         AudioSource audioSource = audioSourcesList[_soundIndex];
 
         audioSource.clip = audioClipsList[Random.Range(0, audioClipsList.Count)];
+        audioSource.Play();
+
+        _soundIndex++;
+    }
+
+    public void PlayJumpSound()
+    {
+        if (_soundIndex >= audioSourcesList.Count) _soundIndex = 0;
+
+        AudioSource audioSource = audioSourcesList[_soundIndex];
+
+        audioSource.clip = JumpAudioClip;
         audioSource.Play();
 
         _soundIndex++;
